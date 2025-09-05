@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo | Calculadora de IMC - Pingüino Médico</title>
+    <style>
+        /* Estilos Generales */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Contenedor Principal de la Calculadora */
+        .imc-calculator-container {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 70, 150, 0.1);
+            width: 100%;
+            max-width: 400px;
+            border-top: 5px solid #0056b3;
+        }
+
+        /* Encabezado */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h2 {
+            margin: 0;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .header p {
+            margin: 5px 0 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Grupo de Campos (Label + Input) */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+            font-size: 15px;
+        }
+
+        .form-group input {
+            width: calc(100% - 20px); /* Ajuste para el padding interno */
+            padding: 12px 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #0056b3;
+            box-shadow: 0 0 8px rgba(0, 86, 179, 0.2);
+            outline: none;
+        }
+
+        /* Estilo para el campo de resultado */
+        #resultadoIMC {
+            font-weight: bold;
+            background-color: #e9ecef;
+            color: #0056b3;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        /* Botón de Cálculo */
+        #calcularBtn {
+            width: 100%;
+            padding: 14px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        #calcularBtn:hover {
+            background-color: #004494;
+        }
+
+        #calcularBtn:active {
+            transform: scale(0.98);
+        }
+        
+        /* Mensaje de error */
+        #error-message {
+            color: #d93025;
+            font-size: 13px;
+            text-align: center;
+            height: 20px; /* Para que no mueva el layout */
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="imc-calculator-container">
+        <div class="header">
+            <h2>Calculadora de IMC</h2>
+            <p>Módulo de prueba para Pingüino Médico</p>
+        </div>
+
+        <div class="form-group">
+            <label for="peso">Peso (en kilogramos)</label>
+            <input type="number" id="peso" placeholder="Ej: 70.5" step="0.1" min="1">
+        </div>
+
+        <div class="form-group">
+            <label for="talla">Talla (en centímetros)</label>
+            <input type="number" id="talla" placeholder="Ej: 175" step="0.1" min="1">
+        </div>
+
+        <div id="error-message"></div>
+
+        <button id="calcularBtn">Calcular IMC</button>
+
+        <div class="form-group" style="margin-top: 25px;">
+            <label for="resultadoIMC">Índice de Masa Corporal (IMC)</label>
+            <input type="text" id="resultadoIMC" readonly>
+        </div>
+    </div>
+
+    <script>
+        // --- Lógica de la Calculadora de IMC ---
+
+        // 1. Seleccionar los elementos del DOM
+        const pesoInput = document.getElementById('peso');
+        const tallaInput = document.getElementById('talla');
+        const calcularBtn = document.getElementById('calcularBtn');
+        const resultadoInput = document.getElementById('resultadoIMC');
+        const errorMensaje = document.getElementById('error-message');
+
+        // 2. Función para realizar el cálculo
+        function calcularIMC() {
+            // Limpiar errores y resultados previos
+            errorMensaje.textContent = '';
+            resultadoInput.value = '';
+
+            // Obtener y convertir los valores de los inputs a números flotantes
+            const peso = parseFloat(pesoInput.value);
+            const tallaCm = parseFloat(tallaInput.value);
+
+            // 3. Validar las entradas del usuario
+            if (isNaN(peso) || peso <= 0) {
+                errorMensaje.textContent = 'Por favor, introduce un peso válido.';
+                pesoInput.focus();
+                return; // Detiene la ejecución si el peso no es válido
+            }
+
+            if (isNaN(tallaCm) || tallaCm <= 0) {
+                errorMensaje.textContent = 'Por favor, introduce una talla válida.';
+                tallaInput.focus();
+                return; // Detiene la ejecución si la talla no es válida
+            }
+
+            // 4. Realizar el cálculo del IMC
+            // Fórmula: IMC = peso (kg) / (talla (m))^2
+            const tallaM = tallaCm / 100; // Convertir centímetros a metros
+            const imc = peso / (tallaM * tallaM);
+
+            // 5. Mostrar el resultado en la casilla correspondiente
+            // Se redondea a un decimal para una mejor lectura
+            resultadoInput.value = imc.toFixed(1);
+        }
+
+        // 6. Asignar el evento al botón
+        // Se activa la función 'calcularIMC' cuando el usuario hace clic en el botón
+        calcularBtn.addEventListener('click', calcularIMC);
+
+        // Opcional: Permitir calcular al presionar "Enter" en los campos de entrada
+        pesoInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                calcularIMC();
+            }
+        });
+        
+        tallaInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                calcularIMC();
+            }
+        });
+
+    </script>
+
+</body>
+</html>
