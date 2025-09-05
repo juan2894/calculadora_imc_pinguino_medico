@@ -22,7 +22,7 @@ Su diseño está pensado para ser intuitivo y útil en un entorno clínico, como
 ## 📸 Captura de Pantalla
 
 ![Captura de Pantalla de la Calculadora de IMC](./screenshot.png)
-*(Recomendación: Reemplaza esta imagen con una captura de pantalla real de tu calculadora)*
+
 
 ##  Tecnologías Utilizadas
 
@@ -34,15 +34,15 @@ Su diseño está pensado para ser intuitivo y útil en un entorno clínico, como
 
 Dado que es un componente autocontenido, su uso es extremadamente sencillo:
 
-1.  **Clona o descarga este repositorio:**
+**Clona o descarga este repositorio:**
     ```bash
-    git clone [URL-DE-TU-REPOSITORIO]
+    git clone [https://github.com/juan2894/calculadora_imc_pinguino_medico.git](https://github.com/juan2894/calculadora_imc_pinguino_medico.git)
     ```
 2.  **Navega al directorio del proyecto:**
     ```bash
-    cd [NOMBRE-DEL-DIRECTORIO]
+    cd calculadora_imc_pinguino_medico
     ```
-3.  **Abre el archivo `calculadora_imc.html`** en tu navegador web preferido (Google Chrome, Firefox, etc.).
+3.  **Abre el archivo `index.html`** en tu navegador web preferido (Google Chrome, Firefox, etc.).
 
 ¡Listo! La calculadora es completamente funcional de forma local, sin necesidad de un servidor web.
 
