@@ -1,203 +1,384 @@
+<!--
+    Este es un documento HTML 5. La declaración <!DOCTYPE html> asegura que el navegador interprete el código
+    con los estándares más modernos de HTML.
+-->
 <!DOCTYPE html>
+<!--
+    La etiqueta <html> es la raíz de todo documento HTML. El atributo 'lang="es"' indica que el idioma
+    principal del contenido de la página es español, lo cual es útil para los motores de búsqueda y
+    herramientas de accesibilidad.
+-->
 <html lang="es">
+<!--
+    La etiqueta <head> contiene metadatos sobre el documento, como el título, la codificación de caracteres,
+    los estilos CSS y otros enlaces a recursos. La información aquí no se muestra directamente en la página.
+-->
 <head>
+    <!--
+        La etiqueta <meta charset="UTF-8"> define la codificación de caracteres del documento. UTF-8 es un
+        estándar que incluye casi todos los caracteres y símbolos del mundo, evitando problemas con
+        acentos y caracteres especiales como la 'ñ'.
+    -->
     <meta charset="UTF-8">
+    <!--
+        La etiqueta <meta name="viewport"> es crucial para el diseño web responsivo. Le dice al navegador
+        cómo controlar las dimensiones y la escala de la página. 'width=device-width' ajusta el ancho
+        de la página al ancho del dispositivo, e 'initial-scale=1.0' establece el nivel de zoom inicial.
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        La etiqueta <title> define el título del documento que se muestra en la pestaña del navegador.
+        Es importante para el SEO (Optimización de Motores de Búsqueda).
+    -->
     <title>Módulo | Calculadora de IMC - Pingüino Médico</title>
+    <!--
+        La etiqueta <style> se utiliza para incluir código CSS directamente en el documento HTML.
+        Todo lo que esté dentro de esta etiqueta será interpretado por el navegador como reglas de estilo.
+    -->
     <style>
-        /* Estilos Generales */
+        /*
+            Este es un comentario en CSS. Sirve para explicar qué hace el código.
+
+            Selector 'body': Aplica estos estilos a la etiqueta <body> de la página.
+        */
         body {
+            /* Define la familia de fuentes (tipografía) para toda la página. Usa fuentes de sistema comunes. */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            /* Establece el color de fondo de la página a un gris claro. */
             background-color: #f4f7f9;
+            /*
+                'display: flex' activa el modelo de layout "Flexbox", que facilita la alineación de elementos.
+                Junto con las dos propiedades siguientes, centra el contenido vertical y horizontalmente.
+            */
             display: flex;
+            /* 'justify-content: center' centra el contenido horizontalmente. */
             justify-content: center;
+            /* 'align-items: center' centra el contenido verticalmente. */
             align-items: center;
+            /* 'height: 100vh' hace que el body ocupe el 100% de la altura de la ventana del navegador (viewport height). */
             height: 100vh;
+            /* 'margin: 0' elimina cualquier margen predeterminado que el navegador pueda aplicar al body. */
             margin: 0;
         }
 
-        /* Contenedor Principal de la Calculadora */
+        /*
+            Selector '.imc-calculator-container': Aplica estos estilos a cualquier elemento que tenga la clase
+            'imc-calculator-container'. En este caso, es el contenedor principal de la calculadora.
+        */
         .imc-calculator-container {
+            /* Color de fondo del contenedor (blanco). */
             background-color: #ffffff;
+            /* 'padding' añade un espacio interno de 30px arriba/abajo y 40px a los lados. */
             padding: 30px 40px;
+            /* 'border-radius' redondea las esquinas del contenedor. */
             border-radius: 12px;
+            /* 'box-shadow' crea una sombra sutil para dar un efecto de profundidad. */
             box-shadow: 0 8px 30px rgba(0, 70, 150, 0.1);
+            /* 'width: 100%' hace que el contenedor ocupe todo el ancho disponible de su padre. */
             width: 100%;
+            /* 'max-width' limita el ancho máximo del contenedor a 400px para que no se estire demasiado en pantallas grandes. */
             max-width: 400px;
+            /* 'border-top' añade un borde superior de 5px de grosor, sólido y de color azul. */
             border-top: 5px solid #0056b3;
         }
 
-        /* Encabezado */
+        /* Selector '.header': Aplica estilos al encabezado de la calculadora. */
         .header {
+            /* 'text-align: center' centra el texto dentro del encabezado. */
             text-align: center;
+            /* 'margin-bottom' añade un espacio de 25px debajo del encabezado. */
             margin-bottom: 25px;
         }
 
+        /* Selector '.header h2': Aplica estilos al título <h2> dentro del encabezado. */
         .header h2 {
+            /* Elimina el margen predeterminado del <h2>. */
             margin: 0;
+            /* Color del texto del título. */
             color: #333;
+            /* Tamaño de la fuente del título. */
             font-size: 24px;
         }
 
+        /* Selector '.header p': Aplica estilos al párrafo <p> dentro del encabezado. */
         .header p {
+            /* Añade un pequeño margen superior. */
             margin: 5px 0 0;
+            /* Color del texto del párrafo. */
             color: #666;
+            /* Tamaño de la fuente del párrafo. */
             font-size: 14px;
         }
 
-        /* Grupo de Campos (Label + Input) */
+        /* Selector '.form-group': Agrupa una etiqueta (<label>) y un campo de entrada (<input>). */
         .form-group {
+            /* Añade un espacio debajo de cada grupo de formulario. */
             margin-bottom: 20px;
         }
 
+        /* Selector '.form-group label': Aplica estilos a las etiquetas de los campos. */
         .form-group label {
+            /* 'display: block' hace que la etiqueta ocupe su propia línea. */
             display: block;
+            /* Margen inferior para separar la etiqueta del campo de entrada. */
             margin-bottom: 8px;
+            /* 'font-weight: 600' hace que el texto de la etiqueta sea seminegrita. */
             font-weight: 600;
+            /* Color del texto de la etiqueta. */
             color: #444;
+            /* Tamaño de la fuente de la etiqueta. */
             font-size: 15px;
         }
 
+        /* Selector '.form-group input': Aplica estilos a los campos de entrada. */
         .form-group input {
-            width: calc(100% - 20px); /* Ajuste para el padding interno */
+            /*
+                'width: calc(100% - 20px)' calcula el ancho del campo. Ocupa el 100% del contenedor
+                menos 20px para compensar el padding horizontal (10px a cada lado).
+            */
+            width: calc(100% - 20px);
+            /* Espacio interno del campo de entrada. */
             padding: 12px 10px;
+            /* Borde del campo de entrada. */
             border: 1px solid #ccc;
+            /* Redondeo de las esquinas del campo. */
             border-radius: 8px;
+            /* Tamaño de la fuente del texto que se escribe en el campo. */
             font-size: 16px;
+            /* 'transition' crea una animación suave cuando cambian el color del borde o la sombra. */
             transition: border-color 0.3s, box-shadow 0.3s;
         }
-        
+
+        /*
+            Selector '.form-group input:focus': Aplica estilos cuando el campo de entrada está
+            seleccionado (tiene el "foco").
+        */
         .form-group input:focus {
+            /* Cambia el color del borde a azul cuando el campo está activo. */
             border-color: #0056b3;
+            /* Añade una sombra azul suave para resaltar el campo activo. */
             box-shadow: 0 0 8px rgba(0, 86, 179, 0.2);
+            /* 'outline: none' elimina el borde de realce predeterminado del navegador. */
             outline: none;
         }
 
-        /* Estilo para el campo de resultado */
+        /*
+            Selector '#resultadoIMC': Aplica estilos específicamente al campo de entrada con el id 'resultadoIMC'.
+            El '#' se usa para seleccionar por 'id', que debe ser único en la página.
+        */
         #resultadoIMC {
+            /* Texto en negrita. */
             font-weight: bold;
+            /* Color de fondo gris claro para diferenciarlo de los campos de entrada. */
             background-color: #e9ecef;
+            /* Color del texto azul. */
             color: #0056b3;
+            /* Tamaño de fuente más grande para el resultado. */
             font-size: 18px;
+            /* Centra el texto del resultado. */
             text-align: center;
         }
-        
-        /* Botón de Cálculo */
+
+        /* Selector '#calcularBtn': Aplica estilos al botón de cálculo. */
         #calcularBtn {
+            /* El botón ocupa el 100% del ancho del contenedor. */
             width: 100%;
+            /* Espacio interno del botón. */
             padding: 14px;
+            /* Color de fondo del botón. */
             background-color: #0056b3;
+            /* Color del texto del botón (blanco). */
             color: white;
+            /* 'border: none' elimina el borde predeterminado del botón. */
             border: none;
+            /* Redondea las esquinas del botón. */
             border-radius: 8px;
+            /* Tamaño de la fuente del texto del botón. */
             font-size: 16px;
+            /* Texto en negrita. */
             font-weight: bold;
+            /* 'cursor: pointer' cambia el cursor a una mano cuando se pasa sobre el botón. */
             cursor: pointer;
+            /* 'transition' anima el cambio de color de fondo y la transformación. */
             transition: background-color 0.3s, transform 0.1s;
         }
 
+        /* Selector '#calcularBtn:hover': Aplica estilos cuando el cursor está sobre el botón. */
         #calcularBtn:hover {
+            /* Oscurece ligeramente el color de fondo del botón. */
             background-color: #004494;
         }
 
+        /* Selector '#calcularBtn:active': Aplica estilos cuando se hace clic en el botón. */
         #calcularBtn:active {
+            /* 'transform: scale(0.98)' hace que el botón se encoja ligeramente para dar feedback visual. */
             transform: scale(0.98);
         }
-        
-        /* Mensaje de error */
+
+        /* Selector '#error-message': Aplica estilos al contenedor del mensaje de error. */
         #error-message {
+            /* Color del texto rojo para indicar un error. */
             color: #d93025;
+            /* Tamaño de fuente pequeño. */
             font-size: 13px;
+            /* Centra el texto del mensaje de error. */
             text-align: center;
-            height: 20px; /* Para que no mueva el layout */
+            /* 'height: 20px' le da una altura fija para que no mueva el resto del layout cuando aparece. */
+            height: 20px;
+            /* Ajustes de margen para posicionarlo correctamente. */
             margin-top: -10px;
             margin-bottom: 10px;
         }
 
     </style>
 </head>
+<!--
+    La etiqueta <body> contiene todo el contenido visible de la página web, como textos, imágenes,
+    formularios, etc.
+-->
 <body>
 
+    <!--
+        Este <div> es el contenedor principal de la calculadora. La clase 'imc-calculator-container'
+        le aplica los estilos que definimos en la sección <style>.
+    -->
     <div class="imc-calculator-container">
+        <!--
+            Este <div> contiene el encabezado (título y subtítulo) de la calculadora.
+        -->
         <div class="header">
             <h2>Calculadora de IMC</h2>
             <p>Módulo de prueba para Pingüino Médico</p>
         </div>
 
+        <!--
+            Este <div> agrupa la etiqueta y el campo de entrada para el peso.
+            La clase 'form-group' le aplica estilos de espaciado.
+        -->
         <div class="form-group">
+            <!-- La etiqueta <label> describe el campo de entrada. 'for="peso"' la asocia con el <input> que tiene 'id="peso"'. -->
             <label for="peso">Peso (en kilogramos)</label>
+            <!--
+                El <input> es el campo donde el usuario introduce datos.
+                - 'type="number"' restringe la entrada a solo números.
+                - 'id="peso"' es un identificador único para este campo.
+                - 'placeholder' muestra un texto de ejemplo cuando el campo está vacío.
+                - 'step="0.1"' permite incrementos de 0.1 (decimales).
+                - 'min="1"' establece el valor mínimo permitido.
+            -->
             <input type="number" id="peso" placeholder="Ej: 70.5" step="0.1" min="1">
         </div>
 
+        <!-- Grupo para la talla, similar al del peso. -->
         <div class="form-group">
             <label for="talla">Talla (en centímetros)</label>
             <input type="number" id="talla" placeholder="Ej: 175" step="0.1" min="1">
         </div>
 
+        <!--
+            Este <div> está vacío inicialmente. Se usará para mostrar mensajes de error al usuario
+            mediante JavaScript. Tiene el id 'error-message' para poder seleccionarlo fácilmente.
+        -->
         <div id="error-message"></div>
 
+        <!--
+            Este es el botón que el usuario presionará para calcular el IMC.
+            El id 'calcularBtn' permite que JavaScript le añada una función al hacer clic.
+        -->
         <button id="calcularBtn">Calcular IMC</button>
 
+        <!-- Grupo para mostrar el resultado del IMC. -->
         <div class="form-group" style="margin-top: 25px;">
             <label for="resultadoIMC">Índice de Masa Corporal (IMC)</label>
+            <!--
+                Este campo de entrada mostrará el resultado.
+                - 'id="resultadoIMC"' para seleccionarlo con JavaScript.
+                - 'readonly' impide que el usuario pueda modificar el valor directamente.
+            -->
             <input type="text" id="resultadoIMC" readonly>
         </div>
     </div>
 
+    <!--
+        La etiqueta <script> se usa para incluir código JavaScript. Este código se ejecutará en el navegador
+        del usuario y permitirá que la página sea interactiva.
+    -->
     <script>
-        // --- Lógica de la Calculadora de IMC ---
+        /*
+            Este es un comentario en JavaScript.
 
-        // 1. Seleccionar los elementos del DOM
-        const pesoInput = document.getElementById('peso');
-        const tallaInput = document.getElementById('talla');
-        const calcularBtn = document.getElementById('calcularBtn');
-        const resultadoInput = document.getElementById('resultadoIMC');
-        const errorMensaje = document.getElementById('error-message');
+            --- Lógica de la Calculadora de IMC ---
+            Este bloque de código se encarga de toda la funcionalidad de la calculadora.
+        */
 
-        // 2. Función para realizar el cálculo
+        // 1. Seleccionar los elementos del DOM (Document Object Model)
+        // 'const' declara una variable constante, cuyo valor no cambiará.
+        // 'document.getElementById()' es un método que busca un elemento en el HTML por su 'id'.
+        // Aquí, guardamos referencias a los elementos que vamos a necesitar para no tener que buscarlos cada vez.
+        const pesoInput = document.getElementById('peso'); // El campo para introducir el peso.
+        const tallaInput = document.getElementById('talla'); // El campo para introducir la talla.
+        const calcularBtn = document.getElementById('calcularBtn'); // El botón de cálculo.
+        const resultadoInput = document.getElementById('resultadoIMC'); // El campo donde se mostrará el resultado.
+        const errorMensaje = document.getElementById('error-message'); // El div para los mensajes de error.
+
+        // 2. Función para realizar el cálculo del IMC
+        // 'function' define un bloque de código reutilizable. Esta función se llamará cuando el usuario haga clic en el botón.
         function calcularIMC() {
-            // Limpiar errores y resultados previos
-            errorMensaje.textContent = '';
-            resultadoInput.value = '';
+            // Limpiar errores y resultados de cálculos anteriores para empezar de cero.
+            errorMensaje.textContent = ''; // Borra el texto del mensaje de error.
+            resultadoInput.value = ''; // Borra el valor del campo de resultado.
 
-            // Obtener y convertir los valores de los inputs a números flotantes
+            // Obtener los valores de los campos de entrada.
+            // '.value' nos da el texto que el usuario escribió en el campo <input>.
+            // 'parseFloat()' convierte ese texto en un número decimal (flotante).
             const peso = parseFloat(pesoInput.value);
             const tallaCm = parseFloat(tallaInput.value);
 
-            // 3. Validar las entradas del usuario
+            // 3. Validar las entradas del usuario para asegurar que son correctas.
+            // 'isNaN()' comprueba si un valor "No es un Número" (Is Not a Number).
+            // Si el peso no es un número o es menor o igual a cero, mostramos un error.
             if (isNaN(peso) || peso <= 0) {
+                // 'textContent' establece el texto que se mostrará en el elemento de error.
                 errorMensaje.textContent = 'Por favor, introduce un peso válido.';
+                // '.focus()' pone el cursor en el campo del peso para que el usuario pueda corregirlo fácilmente.
                 pesoInput.focus();
-                return; // Detiene la ejecución si el peso no es válido
+                // 'return' detiene la ejecución de la función aquí, porque no podemos continuar con datos inválidos.
+                return;
             }
 
+            // Hacemos la misma validación para la talla.
             if (isNaN(tallaCm) || tallaCm <= 0) {
                 errorMensaje.textContent = 'Por favor, introduce una talla válida.';
                 tallaInput.focus();
-                return; // Detiene la ejecución si la talla no es válida
+                return;
             }
 
-            // 4. Realizar el cálculo del IMC
-            // Fórmula: IMC = peso (kg) / (talla (m))^2
-            const tallaM = tallaCm / 100; // Convertir centímetros a metros
-            const imc = peso / (tallaM * tallaM);
+            // 4. Realizar el cálculo del IMC si las validaciones son exitosas.
+            // La fórmula del IMC es: peso (en kg) / (talla (en metros))^2
+            const tallaM = tallaCm / 100; // Convertimos la talla de centímetros a metros.
+            const imc = peso / (tallaM * tallaM); // Aplicamos la fórmula.
 
-            // 5. Mostrar el resultado en la casilla correspondiente
-            // Se redondea a un decimal para una mejor lectura
+            // 5. Mostrar el resultado en la casilla correspondiente.
+            // 'toFixed(1)' redondea el resultado del IMC a un solo decimal para que sea más fácil de leer.
             resultadoInput.value = imc.toFixed(1);
         }
 
-        // 6. Asignar el evento al botón
-        // Se activa la función 'calcularIMC' cuando el usuario hace clic en el botón
+        // 6. Asignar el evento 'click' al botón de cálculo.
+        // 'addEventListener' le dice al navegador que "escuche" un evento en un elemento.
+        // Aquí, cuando el usuario haga 'click' en 'calcularBtn', se ejecutará la función 'calcularIMC'.
         calcularBtn.addEventListener('click', calcularIMC);
 
-        // Opcional: Permitir calcular al presionar "Enter" en los campos de entrada
+        // Opcional: Añadir la funcionalidad de calcular al presionar la tecla "Enter".
+        // Esto mejora la experiencia del usuario.
         pesoInput.addEventListener('keydown', function(event) {
+            // 'event.key' nos dice qué tecla se presionó.
             if (event.key === 'Enter') {
+                // Si la tecla es "Enter", llamamos a la función de cálculo.
                 calcularIMC();
             }
         });
-        
+
+        // Hacemos lo mismo para el campo de la talla.
         tallaInput.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 calcularIMC();
