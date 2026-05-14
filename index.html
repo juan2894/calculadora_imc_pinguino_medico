@@ -118,47 +118,79 @@
 </head>
 <body>
 
+    <!-- Contenedor principal de la aplicación -->
     <div class="imc-calculator-container">
+        <!-- Encabezado con título y descripción -->
         <div class="header">
             <h2>Calculadora de IMC</h2>
             <p>Módulo de prueba para Pingüino Médico</p>
         </div>
 
+        <!-- Campo de entrada para el peso -->
         <div class="form-group">
             <label for="peso">Peso (en kilogramos)</label>
             <input type="number" id="peso" placeholder="Ej: 70.5" step="0.1" min="1">
         </div>
 
+        <!-- Campo de entrada para la talla -->
         <div class="form-group">
             <label for="talla">Talla (en centímetros)</label>
             <input type="number" id="talla" placeholder="Ej: 175" step="0.1" min="1">
         </div>
 
+        <!-- Contenedor para mensajes de error de validación -->
         <div id="error-message"></div>
 
+        <!-- Botón para iniciar el cálculo -->
         <button id="calcularBtn">Calcular IMC</button>
 
+        <!-- Campo de salida para el resultado numérico del IMC (solo lectura) -->
         <div class="form-group" style="margin-top: 25px;">
             <label for="resultadoIMC">Índice de Masa Corporal (IMC)</label>
             <input type="text" id="resultadoIMC" readonly>
         </div>
+
+        <!-- Campo de salida para la clasificación textual del IMC (solo lectura) -->
+        <div class="form-group">
+            <label for="clasificacionIMC">Clasificación</label>
+            <input type="text" id="clasificacionIMC" readonly>
+        </div>
     </div>
 
     <script>
-        // --- Lógica de la Calculadora de IMC ---
+        /**
+         * Lógica principal para la Calculadora de IMC.
+         * Contiene referencias a los elementos del DOM y la función principal de cálculo.
+         */
 
-        // 1. Seleccionar los elementos del DOM
+        /** @type {HTMLInputElement} */
         const pesoInput = document.getElementById('peso');
+
+        /** @type {HTMLInputElement} */
         const tallaInput = document.getElementById('talla');
+
+        /** @type {HTMLButtonElement} */
         const calcularBtn = document.getElementById('calcularBtn');
+
+        /** @type {HTMLInputElement} */
         const resultadoInput = document.getElementById('resultadoIMC');
+
+        /** @type {HTMLInputElement} */
+        const clasificacionInput = document.getElementById('clasificacionIMC');
+
+        /** @type {HTMLElement} */
         const errorMensaje = document.getElementById('error-message');
 
-        // 2. Función para realizar el cálculo
+        /**
+         * Calcula el Índice de Masa Corporal (IMC) basado en el peso y la talla ingresados.
+         * Valida las entradas, realiza el cálculo, determina la clasificación del IMC
+         * y actualiza la interfaz de usuario con los resultados o mensajes de error.
+         */
         function calcularIMC() {
             // Limpiar errores y resultados previos
             errorMensaje.textContent = '';
             resultadoInput.value = '';
+            clasificacionInput.value = '';
 
             // Obtener y convertir los valores de los inputs a números flotantes
             const peso = parseFloat(pesoInput.value);
@@ -185,19 +217,43 @@
             // 5. Mostrar el resultado en la casilla correspondiente
             // Se redondea a un decimal para una mejor lectura
             resultadoInput.value = imc.toFixed(1);
+
+            // 6. Determinar y mostrar la clasificación del IMC
+            let clasificacion = '';
+            if (imc < 18.5) {
+                clasificacion = 'Bajo peso';
+            } else if (imc < 25) {
+                clasificacion = 'Normal';
+            } else if (imc < 30) {
+                clasificacion = 'Sobrepeso';
+            } else {
+                clasificacion = 'Obesidad';
+            }
+            clasificacionInput.value = clasificacion;
         }
 
-        // 6. Asignar el evento al botón
-        // Se activa la función 'calcularIMC' cuando el usuario hace clic en el botón
+        /**
+         * Asigna el evento click al botón de calcular.
+         * Llama a la función 'calcularIMC' cuando el usuario hace clic en el botón.
+         */
         calcularBtn.addEventListener('click', calcularIMC);
 
-        // Opcional: Permitir calcular al presionar "Enter" en los campos de entrada
+        /**
+         * Permite ejecutar el cálculo al presionar la tecla "Enter"
+         * estando enfocado en el campo de peso.
+         * @param {KeyboardEvent} event - El evento del teclado.
+         */
         pesoInput.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 calcularIMC();
             }
         });
         
+        /**
+         * Permite ejecutar el cálculo al presionar la tecla "Enter"
+         * estando enfocado en el campo de talla.
+         * @param {KeyboardEvent} event - El evento del teclado.
+         */
         tallaInput.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 calcularIMC();

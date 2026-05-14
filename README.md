@@ -14,9 +14,10 @@ Su diseño está pensado para ser intuitivo y útil en un entorno clínico, como
 
 * **Interfaz Limpia y Profesional**: Diseño minimalista y enfocado en la usabilidad.
 * **Cálculo Preciso del IMC**: Utiliza la fórmula estándar para el cálculo del IMC ($IMC = \frac{peso_{kg}}{talla_{m}^2}$).
+* **Clasificación del IMC**: Determina automáticamente la categoría del IMC (Bajo peso, Normal, Sobrepeso, Obesidad).
 * **Validación de Entradas**: Evita cálculos erróneos al verificar que los datos de peso y talla sean numéricos y positivos. Muestra mensajes de error claros.
 * **Diseño Responsivo**: Se adapta correctamente a diferentes tamaños de pantalla (móvil y escritorio).
-* **Código Autocontenido**: Todo el código (HTML, CSS, JS) se encuentra en un único archivo para máxima portabilidad.
+* **Código Autocontenido y Documentado**: Todo el código (HTML, CSS, JS) se encuentra en un único archivo, con comentarios de tipo JSDoc y descriptivos para máxima portabilidad y fácil mantenimiento.
 * **Cero Dependencias**: No requiere librerías ni frameworks externos, garantizando un rendimiento óptimo y una fácil implementación.
 
 ## 📸 Captura de Pantalla
